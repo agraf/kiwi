@@ -22,6 +22,7 @@
     <packages type="image">
         <package name="kernel-default"/>
         <package name="systemd"/>
+        <package name="systemd-experimental"/>
         <package name="iputils"/>
         <package name="openssh"/>
         <package name="iproute2"/>

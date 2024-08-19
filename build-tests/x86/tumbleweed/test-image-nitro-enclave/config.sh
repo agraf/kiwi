@@ -4,3 +4,5 @@ echo "Configure image: [$Kiwi_iname]..."
 suseSetupProduct
 suseInsertService nitro-enclave-alive
 echo virtio_mmio > etc/modules-load.d/virtio-mmio.conf
+suseInsertService sshd
+echo "PermitRootLogin yes" > /etc/ssh/sshd_config.d/root.conf
