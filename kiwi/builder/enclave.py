@@ -28,6 +28,7 @@ from kiwi.system.kernel import Kernel
 from kiwi.system.result import Result
 from kiwi.runtime_config import RuntimeConfig
 from kiwi.xml_state import XMLState
+from kiwi.command import Command
 
 from kiwi.exceptions import (
     KiwiEnclaveFormatError,
@@ -154,9 +155,13 @@ class EnclaveBuilder:
         self.initrd = os.path.basename(self.boot_image_task.initrd_filename)
 
         if self.format == 'eif':
-            # TODO: call eif-cli...
-            log.warning(
-                f'WANTS: eif-cli ... {self.initrd} ... {self.kernel_filename} ... {self.custom_cmdline}'
+            self.enclave = self.image_name + ".eif"
+            Command.run(
+                ['eif_build',
+                 '--kernel', '/'.join([self.target_dir, self.kernel_filename]),
+                 '--ramdisk', '/'.join([self.target_dir, self.initrd]),
+                 '--cmdline', self.custom_cmdline,
+                 '--output', self.enclave]
             )
 
         Result.verify_image_size(

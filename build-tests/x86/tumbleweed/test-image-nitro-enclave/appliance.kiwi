@@ -11,10 +11,13 @@
         <packagemanager>zypper</packagemanager>
         <rpm-excludedocs>true</rpm-excludedocs>
         <rpm-check-signatures>false</rpm-check-signatures>
-        <type image="enclave" enclave_format="eif" kernelcmdline="some"/>
+        <type image="enclave" enclave_format="eif" kernelcmdline="reboot=k panic=30 pci=off console=ttyS0 i8042.noaux i8042.nomux i8042.nopnp i8042.dumbkbd random.trust_cpu=on rdinit=/sbin/init"/>
     </preferences>
     <repository type="rpm-md">
         <source path="obsrepositories:/"/>
+    </repository>
+    <repository type="rpm-md">
+        <source path="obs://home:agraf/openSUSE_Tumbleweed"/>
     </repository>
     <packages type="image">
         <package name="kernel-default"/>
@@ -25,6 +28,7 @@
         <package name="less"/>
         <package name="NetworkManager"/>
         <package name="timezone"/>
+        <package name="nitro-enclave-alive"/>
     </packages>
     <packages type="bootstrap">
         <package name="gawk"/>
@@ -40,4 +44,7 @@
         <package name="ca-certificates-mozilla"/>
         <package name="openSUSE-release"/>
     </packages>
+    <users>
+        <user password="$1$wYJUgpM5$RXMMeASDc035eX.NbYWFl0" home="/root" name="root" groups="root"/>
+    </users>
 </image>
